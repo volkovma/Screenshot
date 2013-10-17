@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>ScreenShot</groupId>
+  <artifactId>ScreenShot</artifactId>
+  <version>0.1-alpha</version>
+  <packaging>jar</packaging>
+
+  <name>ScreenShot</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4j.version>1.7.5</slf4j.version>
+    <jintellitype.version>1.3.7</jintellitype.version>
+    <jnativehook.version>1.1.4</jnativehook.version>
+    <java.source.level>1.6</java.source.level>
+    <java.target.level>${java.source.level}</java.target.level>
+  </properties>
+
+  <dependencies>
+    <!--global hot key-->
+    <dependency>
+      <groupId>org.jnativehook</groupId>
+      <artifactId>jnativehook</artifactId>
+      <version>${jnativehook.version}</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/libs/JNativeHook.jar</systemPath>
+    </dependency>
+    <!-- Java FX2-->
+    <dependency>
+      <groupId>javafx</groupId>
+      <artifactId>javafx</artifactId>
+      <version>2.2</version>
+      <scope>system</scope>
+      <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+    </dependency>
+
+    <!-- testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+  </dependencies>
+</project>
