@@ -159,13 +159,7 @@ public class App extends Application {
     Image image = null;
     try {
       File img = new File(fileName);
-      BufferedImage originalImage = ImageIO.read(img);
-      int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-      BufferedImage resizedImage = new BufferedImage(16, 16, type);
-      Graphics2D g = resizedImage.createGraphics();
-      g.drawImage(originalImage, 0, 0, 16, 16, null);
-      g.dispose();
-      image = resizedImage;
+      image = ImageIO.read(img);
     } catch (IOException ex) {
       System.out.println(ex);
     }

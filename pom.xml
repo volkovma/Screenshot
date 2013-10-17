@@ -63,4 +63,15 @@
       <version>${slf4j.version}</version>
     </dependency>
   </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <filtering>false</filtering>
+        <directory>${project.basedir}</directory>
+        <includes>
+          <include>*.png</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
 </project>
