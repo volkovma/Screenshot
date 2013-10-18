@@ -19,10 +19,11 @@ public class GlobalKeyListener implements NativeKeyListener {
 
   @Override
   public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
-    logger.debug("Press key:", nativeKeyEvent.getKeyCode());
+    logger.debug("Press key:"+ nativeKeyEvent.getKeyCode());
     if (nativeKeyEvent.getKeyCode() == NativeKeyEvent.VK_PRINTSCREEN) {
-      service.createScreen();
-      service.openPaint();
+      if(service.createScreen()){
+        service.openPaint();
+      }
     }
   }
 

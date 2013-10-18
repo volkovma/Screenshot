@@ -22,7 +22,11 @@ public class Service {
   /**
    * create screen shot
    */
-  public void createScreen() {
+  public boolean createScreen() {
+    String curTime = TimeStampStr.getInstance().getCurValue();
+    if(curTime.equals(TimeStampStr.getInstance().getLastValue())){
+      return false;
+    }
     Dimension d = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
     int width = (int) d.getWidth();
     int height = (int) d.getHeight();
@@ -32,12 +36,15 @@ public class Service {
       BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
       Graphics g = bi.createGraphics();
       g.drawImage(capturedScreen, 0, 0, width, height, null);
-      String fileNameToSaveTo = getPath(TimeStampStr.getInstance().getCurValue());
+      String fileNameToSaveTo = getPath(curTime);
       writeImage(bi, fileNameToSaveTo, "png");
       logger.info("Screen shot saved to " + fileNameToSaveTo);
     } catch (Exception e) {
       logger.error("ERROR", e);
+      return false;
     }
+    TimeStampStr.getInstance().setLastValue(curTime);
+    return true;
   }
 
 

@@ -67,9 +67,9 @@
     <resources>
       <resource>
         <filtering>false</filtering>
-        <directory>${project.basedir}</directory>
+        <directory>${project.basedir}/src/main</directory>
         <includes>
-          <include>*.png</include>
+          <include>**/*.png</include>
         </includes>
       </resource>
     </resources>

@@ -19,12 +19,6 @@ public class TimeStampStr {
     return ourInstance;
   }
 
-  private TimeStampStr() {
-    if (getLastValue() == null || "".equals(getLastValue())) {
-      getCurValue();
-    }
-  }
-
   public String getLastValue() {
     return lastValue;
   }
@@ -32,12 +26,10 @@ public class TimeStampStr {
   public String getCurValue() {
     Calendar mycalendar = Calendar.getInstance();
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-    String timeStamp = formatter.format(mycalendar.getTime());
-    setLastValue(timeStamp);
-    return lastValue;
+    return formatter.format(mycalendar.getTime());
   }
 
-  private void setLastValue(String lastValue) {
+  public void setLastValue(String lastValue) {
     this.lastValue = lastValue;
   }
 }

@@ -23,7 +23,9 @@ import java.net.URL;
  * Date: 16.10.13
  */
 public class App extends Application {
-  private static Logger logger = LoggerFactory.getLogger(App.class);
+  private final String ICON = "/resource/icon.png";
+  private final String ICON_DESIBLE = "/resource/icon_d.png";
+  private Logger logger = LoggerFactory.getLogger(App.class);
   private TrayIcon trayIcon;
   private Service service;
 
@@ -34,8 +36,8 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     service = new Service();
-    service.enableHotKey();
     createTrayIcon(stage);
+    service.enableHotKey();
     Platform.setImplicitExit(false);
     Scene scene = new Scene(new Group(), 800, 600);
     stage.setScene(scene);
@@ -78,7 +80,7 @@ public class App extends Application {
           service.enableHotKey();
           startItem.setEnabled(false);
           stopItem.setEnabled(true);
-          tray.getTrayIcons()[0].setImage(getIcon("icon.png"));
+          tray.getTrayIcons()[0].setImage(getIcon(ICON));
         }
       };
       //disable hot key
@@ -88,7 +90,7 @@ public class App extends Application {
           service.disableHotKey();
           startItem.setEnabled(true);
           stopItem.setEnabled(false);
-          tray.getTrayIcons()[0].setImage(getIcon("icon_d.png"));
+          tray.getTrayIcons()[0].setImage(getIcon(ICON_DESIBLE));
         }
       };
 
@@ -128,7 +130,7 @@ public class App extends Application {
       popup.add(stopItem);
       popup.add(aboutItem);
       popup.add(closeItem);
-      trayIcon = new TrayIcon(getIcon("icon.png"), "Screen shot edit", popup);
+      trayIcon = new TrayIcon(getIcon(ICON), "Screen shot edit", popup);
       trayIcon.addActionListener(showListener);
       try {
         tray.add(trayIcon);
@@ -158,10 +160,12 @@ public class App extends Application {
   private Image getIcon(String fileName) {
     Image image = null;
     try {
-      File img = new File(fileName);
+      URL url = getClass().getResource(fileName);
+      logger.info("path :"+getClass().getResource(""));
+      File img = new File(url.getFile());
       image = ImageIO.read(img);
-    } catch (IOException ex) {
-      System.out.println(ex);
+    } catch (Exception ex) {
+     logger.error("ERROR",ex);
     }
     return image;
   }
