@@ -1,7 +1,9 @@
-package ScreenShot;
+package tk.screenshotedit;
 
 import junit.framework.Assert;
 import org.junit.Test;
+import tk.screenshotedit.Service;
+import tk.screenshotedit.TimeStampStr;
 
 import java.io.File;
 

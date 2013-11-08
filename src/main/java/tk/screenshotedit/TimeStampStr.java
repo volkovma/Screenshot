@@ -1,4 +1,4 @@
-package ScreenShot;
+package tk.screenshotedit;
 
 
 import java.text.SimpleDateFormat;
