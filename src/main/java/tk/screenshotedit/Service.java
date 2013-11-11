@@ -88,7 +88,9 @@ public class Service {
    * enable global hotkey
    */
   public void disableHotKey() {
-    GlobalScreen.unregisterNativeHook();
+    if(GlobalScreen.isNativeHookRegistered()){
+      GlobalScreen.unregisterNativeHook();
+    }
     logger.info("Disable global hot key");
   }
 

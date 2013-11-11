@@ -42,7 +42,7 @@ public class App extends Application {
     createTrayIcon(stage);
     //service.enableHotKey();
     Platform.setImplicitExit(false);
-    Scene scene = new Scene(new Setting(),800, 600);
+    Scene scene = new Scene(new Setting(stage),800, 600);
     stage.setScene(scene);
   }
 
@@ -115,6 +115,7 @@ public class App extends Application {
       ActionListener closeListener = new ActionListener() {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
+          service.disableHotKey();
           System.exit(0);
         }
       };
