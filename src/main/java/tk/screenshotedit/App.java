@@ -13,7 +13,6 @@ import tk.screenshotedit.forms.Setting;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -23,8 +22,8 @@ import java.util.ResourceBundle;
  * Date: 16.10.13
  */
 public class App extends Application {
-    private final String ICON = "tk/screenshotedit/resources/icon.png";
-    private final String ICON_DESIBLE = "tk/screenshotedit/resources/icon_d.png";
+    private final String ICON = "/icon.png";
+    private final String ICON_DESIBLE = "/icon_d.png";
     private Logger logger = LoggerFactory.getLogger(App.class);
     private TrayIcon trayIcon;
     private static ResourceBundle rb;
@@ -32,7 +31,7 @@ public class App extends Application {
 
 
     public static void main(String[] args) {
-   rb = ResourceBundle.getBundle("tk\\screenshotedit\\resources\\lang.messages", Locale.getDefault());
+   rb = ResourceBundle.getBundle("lang.messages", Locale.getDefault());
     Application.launch(args);
   }
 
@@ -40,9 +39,10 @@ public class App extends Application {
   public void start(Stage stage) throws Exception {
     service = new Service();
     createTrayIcon(stage);
-    //service.enableHotKey();
+    service.enableHotKey();
     Platform.setImplicitExit(false);
     Scene scene = new Scene(new Setting(stage),800, 600);
+    scene.getStylesheets().add("resources/theme-default.css");
     stage.setScene(scene);
   }
 
@@ -165,12 +165,11 @@ public class App extends Application {
   private Image getIcon(String fileName) {
     Image image = null;
     try {
-
-      logger.info("path :"+getClass().getClassLoader().getResource("/"));
-      File img = new File(getFileUrl(fileName).getFile());
-      image = ImageIO.read(img);
+//      File img = new File(getFileUrl(fileName).getFile());
+//      logger.info("IMG icon path :"+img.getPath());
+      image = ImageIO.read(getClass().getResourceAsStream(fileName));
     } catch (Exception ex) {
-     logger.error("ERROR",ex);
+     logger.error("Icon IMG not found",ex);
     }
     return image;
   }

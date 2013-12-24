@@ -41,7 +41,6 @@ public class Setting extends BorderPane {
   private Button exit;
   private HBox hbButton;
   private VBox vbFields;
-  private HBox hbEditorLabel;
   private VBox vbChooseEditor;
   private RadioButton editorDefault;
   private RadioButton editorMSPaint;
@@ -68,23 +67,26 @@ public class Setting extends BorderPane {
   private void initElements() {
     //Center
     vbFields = new VBox();
-    vbFields.setPadding(new Insets(20));
     //Editor
-    hbEditorLabel = new HBox();
+    VBox rowEditor = new VBox();
+    rowEditor.getStyleClass().add("rowbox");
+    HBox hbEditorLabel = new HBox();
     hbEditorLabel.setAlignment(Pos.CENTER);
-    hbEditorLabel.getChildren().add(new Label(rb.getString("editor.choce")));
+    Label editorTitle = new Label(rb.getString("editor.choce"));
+    editorTitle.getStyleClass().add("welcome-text");
+    hbEditorLabel.getChildren().add(editorTitle);
     HBox hbEditorTwo = new HBox();
-    hbEditorTwo.setPadding(new Insets(0, 20, 0, 20));
+    hbEditorTwo.setPadding(new Insets(0,0,10,0));
     editorDefaultImg = new ImageView();
     editorDefaultImg.setImage(new Image("tk/screenshotedit/resources/paint-48.png"));
     vbChooseEditor = new VBox();
     editorDefault = new RadioButton(rb.getString("editor.default"));
     editorDefault.setSelected(true);
+    editorDefault.getStyleClass().add("radio-button");
     editorMSPaint = new RadioButton(rb.getString("editor.mspaint"));
     editorUser = new RadioButton(rb.getString("editor.user"));
     vbChooseEditor.setSpacing(10);
     HBox hbEditorUser = new HBox();
-    hbEditorUser.setPadding(new Insets(0,20,0,20));
     editorFileChooser = new FileChooser();
     editorFileChooser.setTitle(rb.getString("editor.file.chooser.title"));
     openFileChooserDialog = new Button(rb.getString("editor.file.chooser"));
@@ -97,13 +99,11 @@ public class Setting extends BorderPane {
     hbEditorUser.getChildren().addAll(tfEditorOther, openFileChooserDialog);
     vbChooseEditor.getChildren().addAll(editorDefault, editorMSPaint, editorUser);
     hbEditorTwo.getChildren().addAll(editorDefaultImg, vbChooseEditor, hbEditorUser);
-
-    vbFields.getChildren().addAll(hbEditorLabel, hbEditorTwo);
+    rowEditor.getChildren().addAll(hbEditorLabel, hbEditorTwo);
+    vbFields.getChildren().addAll(rowEditor);
     //bottom
     hbButton = new HBox();
     hbButton.setAlignment(Pos.CENTER);
-    hbButton.setSpacing(10);
-    hbButton.setPadding(new Insets(0, 20, 10, 20));
     exit = new Button(rb.getString("settings.exit"));
     save = new Button(rb.getString("settings.save"));
     save.setMaxWidth(Double.MAX_VALUE);

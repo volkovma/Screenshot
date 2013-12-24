@@ -66,11 +66,12 @@
     <resources>
       <resource>
         <filtering>false</filtering>
-        <directory>${project.basedir}/src/main/java</directory>
+        <directory>${project.basedir}/src/main/resources</directory>
         <includes>
           <include>**/*.png</include>
           <include>**/*.fxml</include>
           <include>**/*.properties</include>
+          <include>**/*.css</include>
         </includes>
       </resource>
     </resources>
@@ -90,6 +91,19 @@
                   </execution>
               </executions>
           </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+            <archive>
+              <manifest>
+                <mainClass>tk.screenshotedit.App</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-jar-plugin</artifactId>
